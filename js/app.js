@@ -1,14 +1,63 @@
-/*
- * Create a list that holds all of your cards
- */
-let cardsArray = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'];
-var memoryValues = [];
-var memoryTileIds = [];
-var cardsFlipped = 0;
-$deck = $('.deck');
-match = 0;
-moves = 0;
-$deck = $('.deck')
+$(document).ready(function () {
+var app = {
+    cards: ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'],
+    init: function() {
+      app.shuffle();
+    },
+
+    //Shuffle function from http://stackoverflow.com/a/2450976
+    shuffle : function (array) {
+        var currentIndex = app.cards.length, temporaryValue, randomIndex;
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = app.cards[currentIndex];
+            app.cards[currentIndex] = app.cards[randomIndex];
+            app.cards[randomIndex] = temporaryValue;
+        }
+        app.assignCards();
+        console.log('Shuffled Card Array:' +app.cards);
+        //return array;
+    },
+    assignCards: function() {
+      $('.card').each(function(index)  {
+          $(this).attr('data-card-value', app.cards[index]);
+      });
+      app.clickHandlers();
+    },
+    clickHandlers: function () {
+      $('.card').on('click', function() {
+        $(this).html('<i>' +$(this).data('cardValue')+ '</i>').addClass('open').addClass('show');
+        app.checkMatch();
+      });
+    },
+    checkMatch: function () {
+        if($('.open').length == 2) {
+            if($('.open').first().data('cardValue') == $('.open').last().data('cardValue')); {
+                $('.open').each(function() {
+                  $(this).addClass('match');
+                });
+
+            } else {
+              //flip cards back over
+              setTimeout(function () {
+
+              }, 1000);
+            }
+        }
+         $('.open').each(function() {
+           $(this).removeClass('open');
+         });
+    }
+  };
+  app.init();
+});
+
+
+
+
+
 
 /*
  * Display the cards on the page
@@ -17,33 +66,20 @@ $deck = $('.deck')
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
 
-    return array;
-}
-
-function initializeGame ();
-  let allCards = shuffle(cardsArray);
-  cardsFlipped = 0;
-  var output = '';
-  //match = 0;
-  //moves = 0;
-
-  //for loop goes here to create html
-  for (var i=0, i < cardsArray.length, i++) {
-  output += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'))
-  }
-  addCardListener();
+  //
+  // function initializeGame ();
+  //   let allCards = shuffle(cardsArray);
+  //   $deck.empty();
+  //   match = 0;
+  //   moves = 0;
+  //   $moves.text('0');
+  //   //for loop goes here to create html
+  //   for (var i=0, i < cardsArray.length, i++) {
+  //   output += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'))
+  //   }
+  //   addCardListener();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -55,9 +91,27 @@ function initializeGame ();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let addCardListener = function () {
-
-}
+  // let addCardListener = function () {
+  //   $('.card').click(function()) {
+  //     let $this = $(this);
+  //
+  //     if($this.hasClass('show') || $this.hasClass('match')) {return true;}
+  //
+  //     let card = $this.context.innerHTML;
+  //     $this.addClass('open show');
+  //     allOpen.push(card);
+  //
+  //     if (allOpen.length > 1) {
+  //       if(card === allOpen[0]) {
+  //         $deck.getElementByClass('.open').addClass('match');
+  //         setTimeout (function () {
+  //           $deck.getElementByClass('.open').removeClass('open show');
+  //
+  //         })
+  //       }
+  //     }
+  //   })
+  // }
 
 //one attempt at function to open cards below
  /*$('.card').click(function(tile, val) {
@@ -88,3 +142,4 @@ openCards = [];
 
 if
 });*/
+//}
