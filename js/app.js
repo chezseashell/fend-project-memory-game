@@ -20,12 +20,14 @@ var app = {
         console.log('Shuffled Card Array:' +app.cards);
         //return array;
     },
+
     assignCards: function() {
       $('.card').each(function(index)  {
           $(this).attr('data-card-value', app.cards[index]);
       });
       app.clickHandlers();
     },
+
     clickHandlers: function () {
       $('.card').on('click', function() {
         //this code below is showing icons but not shuffling the icons
@@ -40,6 +42,7 @@ var app = {
         app.checkMatch();
       });
     },
+
     checkMatch: function () {
         if($('.card.open').length === 2) {
             if($('.open').first().data('cardValue') == $('.open').last().data('cardValue')) {
@@ -47,8 +50,9 @@ var app = {
                   $(this).addClass('match');
                 });
                 $('.open').each(function() {
-                  $(this).removeClass('open');
+                  $(this).removeClass('open show');
                 });
+                app.checkWin();
             } else {
               //flip cards back over
               setTimeout(function () {
@@ -58,8 +62,14 @@ var app = {
               }, 1000);
             }
         }
+    },
 
-    }
+    checkWin: function() {
+        if($('.card.match').length === 16) {
+              $('.deck').html('<h1>Congratulations! You\'ve Won!</h1>')
+              $(this).setAttribute('style', 'background-color: white; text-align: center;');
+        }
+    },
   };
   app.init();
 });
