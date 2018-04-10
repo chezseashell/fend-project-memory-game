@@ -28,27 +28,37 @@ var app = {
     },
     clickHandlers: function () {
       $('.card').on('click', function() {
-        $(this).html('<i>' +$(this).data('cardValue')+ '</i>').addClass('open').addClass('show');
+        //this code below is showing icons but not shuffling the icons
+          // let card = $(this).data('cardValue').innerHTML;
+          // $(this).addClass('open show');
+          // allOpen = [],
+          // allOpen.push(card);
+
+        //this code below is shuffling array but ot showing icons
+        $(this).html('<p>' +$(this).data('cardValue')+ '</p>').addClass('open show fa');
+        $(this).html('<i>' +$(this).data('cardValue')+ '</i>').addClass('open show fa')
         app.checkMatch();
       });
     },
     checkMatch: function () {
-        if($('.open').length == 2) {
-            if($('.open').first().data('cardValue') == $('.open').last().data('cardValue')); {
+        if($('.card.open').length === 2) {
+            if($('.open').first().data('cardValue') == $('.open').last().data('cardValue')) {
                 $('.open').each(function() {
                   $(this).addClass('match');
                 });
-
+                $('.open').each(function() {
+                  $(this).removeClass('open');
+                });
             } else {
               //flip cards back over
               setTimeout(function () {
-
+                  $('.open').each(function () {
+                    $(this).html('').removeClass('open show');
+                  });
               }, 1000);
             }
         }
-         $('.open').each(function() {
-           $(this).removeClass('open');
-         });
+
     }
   };
   app.init();
@@ -59,27 +69,11 @@ var app = {
 
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 
 
-  //
-  // function initializeGame ();
-  //   let allCards = shuffle(cardsArray);
-  //   $deck.empty();
-  //   match = 0;
-  //   moves = 0;
-  //   $moves.text('0');
-  //   //for loop goes here to create html
-  //   for (var i=0, i < cardsArray.length, i++) {
-  //   output += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'))
-  //   }
-  //   addCardListener();
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
