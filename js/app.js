@@ -9,6 +9,8 @@ var app = {
     second: 0,
     $rating: $('fa-star'),
     $moves: $('.moves'),
+    newCards: '',
+    deck: document.querySelector('.deck'),
 
     //Scoring system 1-3 stars
     stars1: 22,
@@ -21,9 +23,41 @@ var app = {
     // });
 
 
+    //this function will start the game
+    init: function() {
+        let allCards = app.shuffle(app.cards);
+          app.deck.innerHTML = '';
+        // $('.deck').empty();
+        // match: 0,
+        // moves = 0,
+        // $('.moves').text('0'),
+        // allCards;
+
+        for (let i = 0; i < allCards.length; i++) {
+            app.newCards += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'
+            app.deck.innerHTML = app.newCards;
+            cards = $('.card');
+          //$('deck').append($('<li class="card"><i class="fa fa-' + app.cards[i] + '"></i></li>'))
+        }
+        app.flipCard();
+
+        // app.clickHandlers();
+    },
+
+
+    flipCard: function () {
+        for (let i = 0; i < cards.length; i++)  {
+          cards[i].addEventListener('click', function() {
+            this.classList.add('open', 'show');
+            //tempArray.push(cards[i]);
+          });
+        }
+    },
+
+
     //Shuffle function from http://stackoverflow.com/a/2450976
     shuffle: function (array) {
-        var currentIndex = app.cards.length, temporaryValue, randomIndex;
+        let currentIndex = array.length, temporaryValue, randomIndex;
 
         while (currentIndex !== 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -37,20 +71,18 @@ var app = {
         return array;
     },
 
-    //this function will start the game
-    init: function() {
-        let allCards = app.shuffle();
-        match: 0,
-        moves = 0,
-        $('.moves').text('0'),
-        allCards;
-    },
+
 
     assignCards: function() {
-      $('.card').each(function(index)  {
-          $(this).attr('data-card-value', app.cards[index]);
-      });
-      app.clickHandlers();
+      // for (let i = 0; i < allCards.length; i++) {
+      //   $('deck').append($('<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'))
+      // }
+
+      // old version
+      // $('.card').each(function(index)  {
+      //     $(this).attr('data-card-value', app.cards[index]);
+      // });
+      // app.clickHandlers();
       // app.starRating();
     },
 
@@ -109,23 +141,23 @@ var app = {
       // };
     // },
 
-    clickHandlers: function () {
-      $('.card').on('click', function() {
-        //this code below is showing icons but not shuffling the icons
-          let card = $(this).data('cardValue').innerHTML;
-          $(this).addClass('open show');
-          allOpen = [],
-          allOpen.push(card);
-
-        //this code below is shuffling array but ot showing icons
-        $(this).html('<p>' +$(this).data('cardValue')+ '</p>').addClass('open show fa');
-        $(this).html('<i>' +$(this).data('cardValue')+ '</i>').addClass('open show fa')
-        app.checkMatch();
-      });
-      // moves++;
-      // app.starRating(moves);
-      // $('.moves').html(moves);
-    },
+    // clickHandlers: function () {
+    //   $('.card').on('click', function() {
+    //     //this code below is showing icons but not shuffling the icons
+    //       let card = $(this).data('cardValue').innerHTML;
+    //       $(this).addClass('open show');
+    //       allOpen = [],
+    //       allOpen.push(card);
+    //
+    //     //this code below is shuffling array but ot showing icons
+    //     $(this).html('<p>' +$(this).data('cardValue')+ '</p>').addClass('open show fa');
+    //     $(this).html('<i>' +$(this).data('cardValue')+ '</i>').addClass('open show fa')
+    //     app.checkMatch();
+    //   });
+    //   // moves++;
+    //   // app.starRating(moves);
+    //   // $('.moves').html(moves);
+    // },
 
     checkMatch: function () {
         if($('.card.open').length === 2) {
