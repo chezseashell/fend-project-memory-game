@@ -1,12 +1,28 @@
 $(document).ready(function () {
 var app = {
     cards: ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'],
-    init: function() {
-      app.shuffle();
-    },
+
+    //Set variables
+    nowTime:'',
+    match: 0,
+    moves: 0,
+    second: 0,
+    $rating: $('fa-star'),
+    $moves: $('.moves'),
+
+    //Scoring system 1-3 stars
+    stars1: 22,
+    stars2: 16,
+    stars3: 14,
+
+    //testing code below to start timer
+    // document.querySelector('.deck').addEventListener('click', function() {
+    //   stopTimer = false; timerStart()
+    // });
+
 
     //Shuffle function from http://stackoverflow.com/a/2450976
-    shuffle : function (array) {
+    shuffle: function (array) {
         var currentIndex = app.cards.length, temporaryValue, randomIndex;
 
         while (currentIndex !== 0) {
@@ -18,7 +34,16 @@ var app = {
         }
         app.assignCards();
         console.log('Shuffled Card Array:' +app.cards);
-        //return array;
+        return array;
+    },
+
+    //this function will start the game
+    init: function() {
+        let allCards = app.shuffle();
+        match: 0,
+        moves = 0,
+        $('.moves').text('0'),
+        allCards;
     },
 
     assignCards: function() {
@@ -26,21 +51,80 @@ var app = {
           $(this).attr('data-card-value', app.cards[index]);
       });
       app.clickHandlers();
+      // app.starRating();
     },
+
+    resetTimer: function()  {
+        resetTimer(nowTime);
+        second = 0;
+        $('.timer').text(`${second}`)
+        startTimer();
+    },
+
+    //Testing code below to start timer when game is loaded
+    // startTimer: function(timer)  {
+    //   if (ready == true)  {
+    //       var timer = 0;
+    //       var hour = 0;
+    //       var minute = 0;
+    //       var second = 0;
+    //       window.setInterval (function()  {
+    //         ++timer;
+    //         hour = Math.floor(timer / 3600)
+    //         minute = Math.floor((timer - hour * 3600) / 60);
+    //         second = timer - hour * 3600 - minute * 60;
+    //         if (hour < 10) hour = '0' + hour;
+    //         if (minute < 10) minute = '0' + minute;
+    //         if (second < 10) second = '0' + second;
+    //         $('#timer').innerHTML = hour + ':' + minute + ':' + second;
+    //             if(stopTimer) {
+    //               $('#timer').innerHTML = '00:00:00';
+    //               timer = 0;
+    //               hour = 0;
+    //               minute = 0;
+    //               second = 0;
+    //               return;
+    //             }
+    //       }, 1000)
+    //   }
+    // },
+
+    //Rating system: higher number of moves = lower stars
+    // starRating: function()  {
+    //   let rating = 3;
+    //   if (moves > stars3 && moves < stars2)  {
+    //     $rating.eq(3).removeClass('fa-star').addClass('fa-star-o');
+    //   } else if (moves > stars2 && moves <stars1) {
+    //     $rating.eq(2).removeClass('fa-star').addClass('fa-star-o');
+    //   } else if (moves > stars1) {
+    //     $rating.eq(1).removeClass('fa-star').addClass('fa-star-o');
+    //     rating = 1;
+    //   }
+    //   return {score: rating};
+
+
+      // $('.moves').innerText += $('.moves').innerText +1;
+      // if ($('.moves').innerText == '16' || $('.moves').innerText == '22') {
+      //   $('.fa-star').parentNode.removeChild($('.fa-star'));
+      // };
+    // },
 
     clickHandlers: function () {
       $('.card').on('click', function() {
         //this code below is showing icons but not shuffling the icons
-          // let card = $(this).data('cardValue').innerHTML;
-          // $(this).addClass('open show');
-          // allOpen = [],
-          // allOpen.push(card);
+          let card = $(this).data('cardValue').innerHTML;
+          $(this).addClass('open show');
+          allOpen = [],
+          allOpen.push(card);
 
         //this code below is shuffling array but ot showing icons
         $(this).html('<p>' +$(this).data('cardValue')+ '</p>').addClass('open show fa');
         $(this).html('<i>' +$(this).data('cardValue')+ '</i>').addClass('open show fa')
         app.checkMatch();
       });
+      // moves++;
+      // app.starRating(moves);
+      // $('.moves').html(moves);
     },
 
     checkMatch: function () {
@@ -63,11 +147,15 @@ var app = {
             }
         }
     },
+    // moveCounter: function ()  {
+    //   $('.card').on('click', function ()  {
+    //     for ()
+    //   })
+    // }
 
     checkWin: function() {
         if($('.card.match').length === 16) {
               $('.deck').html('<h1>Congratulations! You\'ve Won!</h1>')
-              $(this).setAttribute('style', 'background-color: white; text-align: center;');
         }
     },
   };

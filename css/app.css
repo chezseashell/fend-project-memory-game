@@ -81,6 +81,16 @@ h1 {
     font-size: 33px;
 }
 
+.deck h1 {
+    font-size: 32px;
+    background-color: white;
+    text-align: center;
+    padding: 25px;
+    box-shadow: 5px 5px 5px #000;
+    align-content: center;
+    width: 540px;
+}
+
 /*
  * Styles for the Score Panel
  */
