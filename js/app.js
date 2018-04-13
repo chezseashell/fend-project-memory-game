@@ -1,84 +1,94 @@
-$(document).ready(function () {
-var app = {
-    cards: ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'],
+//$(document).ready(function () {
+
 
     //Set variables
-    tempArray: [],
-    nowTime:'',
-    match: 0,
-    moves: 0,
-    second: 0,
-    $rating: $('fa-star'),
-    $moves: $('.moves'),
-    newCards: '',
-    deck: document.querySelector('.deck'),
+    let cards= ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'];
+    let tempArray=[];
+    nowTime='';
+    match= 0;
+    moves= 0;
+    second= 0;
+    $rating= $('fa-star');
+    $moves= $('.moves');
+    newCards= '';
+    deck= document.querySelector('.deck');
+
 
     //Scoring system 1-3 stars
-    stars1: 22,
-    stars2: 16,
-    stars3: 14,
+    stars1= 22;
+    stars2= 16;
+    stars3= 14;
 
 
     //this function will start the game
-    init: function() {
-        let allCards = app.shuffle(app.cards);
-          app.deck.innerHTML = '';
-
+  function init() {
+        let allCards = shuffle(cards);
+          deck.innerHTML = '';
+        let tempArray = [];
 
         for (let i = 0; i < allCards.length; i++) {
-            app.newCards += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'
-            app.deck.innerHTML = app.newCards;
+            newCards += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'
+            deck.innerHTML = newCards;
             cards = $('.card');
         }
-        app.flipCard();
-    },
+
+        flipCard();
+  };
 
 
-    flipCard: function () {
+    function flipCard() {
         for (let i = 0; i < cards.length; i++)  {
-          cards[i].addEventListener('click', function() {
-            this.classList.add('open', 'show');
-            app.tempArray.push(cards[i]);
-          });
+            cards[i].addEventListener('click', function() {
+              this.classList.add('open', 'show');
+              tempArray.push(cards[i]);
+            });
         }
-    },
+        checkMatch();
+    };
 
-    checkMatch: function() {
-        if($('.open').length == 2) {
-                if()  {
-                    $('.open').each(function()  {
-                    $(this).removeClass('open show');
 
-                });
-            }
+function checkMatch() {
+    if ($('.open').length == 2) {
+          if (tempArray[0].innerHTML === tempArray[1].innerHTML) {
+                tempArray[0].className = 'card open show match';
+                tempArray[1].className = 'card open show match';
+                match++;
 
-        }
-      }
+          } else {
+            //flip cards back convert
+              setTimeout(function () {
+                  tempArray[0].removeClass('open show');
+                  tempArray[1].removeClass('open show');
+              }, 1000);
+          }
+    }
+};
+
 
     //Shuffle function from http://stackoverflow.com/a/2450976
-    shuffle: function (array) {
+    function shuffle(array) {
         let currentIndex = array.length, temporaryValue, randomIndex;
 
         while (currentIndex !== 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-            temporaryValue = app.cards[currentIndex];
-            app.cards[currentIndex] = app.cards[randomIndex];
-            app.cards[randomIndex] = temporaryValue;
+            temporaryValue = cards[currentIndex];
+            cards[currentIndex] = cards[randomIndex];
+            cards[randomIndex] = temporaryValue;
         }
         //app.assignCards();
-        console.log('Shuffled Card Array:' +app.cards);
+        console.log('Shuffled Card Array:' +cards);
         return array;
-    },
+    };
 
 
 
-    resetTimer: function()  {
-        resetTimer(nowTime);
-        second = 0;
-        $('.timer').text(`${second}`)
-        startTimer();
-    },
+    // function resetTimer()  {
+    //     resetTimer(nowTime);
+    //     second = 0;
+    //     $('.timer').text(`${second}`)
+    //     startTimer();
+    // }
 
 
     //Needs further work
@@ -177,14 +187,15 @@ var app = {
     //   })
     // }
 
-    checkWin: function() {
+    function checkWin() {
         if($('.card.match').length === 16) {
               $('.deck').html('<h1>Congratulations! You\'ve Won!</h1>')
+
         }
-    },
-  };
-  app.init();
-});
+    };
+
+  init();
+// });
 
 
 
