@@ -41,24 +41,25 @@
             cards[i].addEventListener('click', function() {
               this.classList.add('open', 'show');
               tempArray.push(cards[i]);
+              checkMatch();
+
             });
         }
-        checkMatch();
     };
 
 
 function checkMatch() {
-    if ($('.open').length == 2) {
-          if (tempArray[0].innerHTML === tempArray[1].innerHTML) {
-                tempArray[0].className = 'card open show match';
-                tempArray[1].className = 'card open show match';
+    if ($('LI.card.open.show').length == 2) {
+          if ($('LI.card.open.show').first()["0"].innerHTML === $('LI.card.open.show').last()["0"].innerHTML) {
+                $('LI.card.open.show').first()["0"].className = 'card show match';
+                $('LI.card.open.show').last()["0"].className = 'card show match';
                 match++;
 
           } else {
             //flip cards back convert
               setTimeout(function () {
-                  tempArray[0].removeClass('open show');
-                  tempArray[1].removeClass('open show');
+                  $('LI.card.open.show').first()["0"].classList = ('card');
+                  $('LI.card.open.show').last()["0"].classList = ('card');
               }, 1000);
           }
     }
@@ -66,20 +67,20 @@ function checkMatch() {
 
 
     //Shuffle function from http://stackoverflow.com/a/2450976
-    function shuffle(array) {
-        let currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = cards[currentIndex];
-            cards[currentIndex] = cards[randomIndex];
-            cards[randomIndex] = temporaryValue;
-        }
-        //app.assignCards();
-        console.log('Shuffled Card Array:' +cards);
-        return array;
-    };
+    while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = cards[currentIndex];
+          cards[currentIndex] = cards[randomIndex];
+          cards[randomIndex] = temporaryValue;
+    }
+    //app.assignCards();
+    console.log('Shuffled Card Array:' +cards);
+    return array;
+};
 
 
 
