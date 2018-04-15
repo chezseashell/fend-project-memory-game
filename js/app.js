@@ -4,6 +4,10 @@
     //Set variables
     let cards= ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'];
     let tempArray=[];
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
     nowTime='';
     match= 0;
     moves= 0;
@@ -54,7 +58,7 @@ function checkMatch() {
                 $('LI.card.open.show').first()["0"].className = 'card show match';
                 $('LI.card.open.show').last()["0"].className = 'card show match';
                 match++;
-
+                checkWin();
           } else {
             //flip cards back convert
               setTimeout(function () {
@@ -64,6 +68,7 @@ function checkMatch() {
           }
     }
 };
+
 
 
     //Shuffle function from http://stackoverflow.com/a/2450976
@@ -187,11 +192,33 @@ function shuffle(array) {
     //     for ()
     //   })
     // }
+    
+
 
     function checkWin() {
         if($('.card.match').length === 16) {
-              $('.deck').html('<h1>Congratulations! You\'ve Won!</h1>')
+              winModal();
+        }
+    };
 
+    function winModal() {
+
+
+
+
+        //open the modal
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
         }
     };
 
