@@ -31,6 +31,7 @@ var app = {
             cards = $('.card');
         }
         app.flipCard();
+
     },
 
 
@@ -38,22 +39,31 @@ var app = {
         for (let i = 0; i < cards.length; i++)  {
           cards[i].addEventListener('click', function() {
             this.classList.add('open', 'show');
-            app.tempArray.push(cards[i]);
+            //app.tempArray.push(cards[i]);
+            app.checkMatch();
+
           });
         }
     },
 
     checkMatch: function() {
-        if($('.open').length == 2) {
-                if()  {
-                    $('.open').each(function()  {
-                    $(this).removeClass('open show');
+      if($('LI.open.show').length == 2) {
+            if($('LI.open.show').first()["0"].innerHTML === $('LI.open.show').last()["0"].innerHTML) {
+                  $('.open').each(function()  {
+                        $(this).addClass('match');
 
-                });
+                  });
+            }  else {
+                  setTimeout(function() {
+                      $(this).removeClass('open show');
+                  }, 1000);
             }
-
-        }
+            $('LI.open.show').each(function()  {
+                  $(this).removeClass('open show');
+                  
+            });
       }
+},
 
     //Shuffle function from http://stackoverflow.com/a/2450976
     shuffle: function (array) {
@@ -73,12 +83,12 @@ var app = {
 
 
 
-    resetTimer: function()  {
-        resetTimer(nowTime);
-        second = 0;
-        $('.timer').text(`${second}`)
-        startTimer();
-    },
+    // resetTimer: function()  {
+    //     resetTimer(nowTime);
+    //     second = 0;
+    //     $('.timer').text(`${second}`)
+    //     startTimer();
+    // },
 
 
     //Needs further work
