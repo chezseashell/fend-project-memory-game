@@ -192,7 +192,7 @@ function shuffle(array) {
     //     for ()
     //   })
     // }
-    
+
 
 
     function checkWin() {
@@ -221,6 +221,10 @@ function shuffle(array) {
           }
         }
     };
+
+
+
+
 
   init();
 // });
