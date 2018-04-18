@@ -97,7 +97,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 500px;
     margin-bottom: 10px;
 }
 
@@ -113,10 +113,21 @@ h1 {
     display: inline-block;
 }
 
-.score-panel .restart {
+.score-panel .restart  {
     float: right;
     cursor: pointer;
+
 }
+
+#timer {
+  font-family: 'Open Sans', sans-serif;
+  display: inline-block;
+  padding-left: 40px;
+}
+
+/* #timer :not(:last-child):after {
+  content: ':';
+} */
 
 /* The Modal (background) */
 .modal {

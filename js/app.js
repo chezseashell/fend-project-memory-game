@@ -8,14 +8,22 @@
     var modal = document.getElementById('myModal');
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    nowTime='';
+    let timeoutID='';
+
+    //for the timer
+    let time = "00:00"
+    let seconds = 0;
+    let minutes = 0;
+    let t;
+    let timer = document.getElementById("timer");
     match= 0;
     moves= 0;
-    second= 0;
     $rating= $('fa-star');
     $moves= $('.moves');
     newCards= '';
     deck= document.querySelector('.deck');
+
+
 
 
     //Scoring system 1-3 stars
@@ -37,6 +45,7 @@
         }
 
         flipCard();
+
   };
 
 
@@ -46,6 +55,7 @@
               this.classList.add('open', 'show');
               tempArray.push(cards[i]);
               checkMatch();
+              startTimer();
 
             });
         }
@@ -59,6 +69,7 @@ function checkMatch() {
                 $('LI.card.open.show').last()["0"].className = 'card show match';
                 match++;
                 checkWin();
+                stopClock();
           } else {
             //flip cards back convert
               setTimeout(function () {
@@ -68,6 +79,44 @@ function checkMatch() {
           }
     }
 };
+
+
+//timer to count to end of game -- until $('.match') == 16
+
+function startTimer() {
+       clearInterval(t);
+      t = setInterval(buildTimer,1000);
+  }
+
+timer.textContent = time;
+function buildTimer() {
+    seconds++;
+        if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes === 60) {
+                minutes = 0;
+                seconds = 0;
+            }
+        }
+timer.textContent = (minutes < 10 ? "0" + minutes.toString(): minutes) + ":" + (seconds < 10 ? "0" + seconds.toString(): seconds);
+}
+
+function stopClock() {
+   if ($('.match').length === 16){
+     clearInterval(t);
+   GameEndMessage();
+   }
+}
+
+function resetTimer() {
+  clearInterval(t);
+  seconds = 0;
+  minutes = 0;
+  timer.textContent = time;
+ }
+
+
 
 
 
@@ -88,50 +137,6 @@ function shuffle(array) {
 };
 
 
-
-    // function resetTimer()  {
-    //     resetTimer(nowTime);
-    //     second = 0;
-    //     $('.timer').text(`${second}`)
-    //     startTimer();
-    // }
-
-
-    //Needs further work
-        //testing code below to start timer
-        // document.querySelector('.deck').addEventListener('click', function() {
-        //   stopTimer = false; timerStart()
-        // });
-
-
-    //Needs further work
-        //Testing code below to start timer when game is loaded
-        // startTimer: function(timer)  {
-        //   if (ready == true)  {
-        //       var timer = 0;
-        //       var hour = 0;
-        //       var minute = 0;
-        //       var second = 0;
-        //       window.setInterval (function()  {
-        //         ++timer;
-        //         hour = Math.floor(timer / 3600)
-        //         minute = Math.floor((timer - hour * 3600) / 60);
-        //         second = timer - hour * 3600 - minute * 60;
-        //         if (hour < 10) hour = '0' + hour;
-        //         if (minute < 10) minute = '0' + minute;
-        //         if (second < 10) second = '0' + second;
-        //         $('#timer').innerHTML = hour + ':' + minute + ':' + second;
-        //             if(stopTimer) {
-        //               $('#timer').innerHTML = '00:00:00';
-        //               timer = 0;
-        //               hour = 0;
-        //               minute = 0;
-        //               second = 0;
-        //               return;
-        //             }
-        //       }, 1000)
-        //   }
-        // },
 
     //Needs further work
           //Rating system: higher number of moves = lower stars
@@ -154,17 +159,6 @@ function shuffle(array) {
             // };
           // },
 
-
-
-
-      // if(tempArray.length = 2) {
-      //     if(tempArray[0] !== tempArray[1]) {
-      //       tempArray[0].classList.remove('open', 'show');
-      //       tempArray[1].classList.remove('open', 'show');
-      //       tempArray = [0];
-      //     }
-      // }
-    // },
 
 
     // checkMatch: function () {
@@ -218,6 +212,7 @@ function shuffle(array) {
         window.onclick = function(event) {
           if (event.target == modal) {
               modal.style.display = "none";
+              resetTimer();
           }
         }
     };
