@@ -16,12 +16,14 @@
     let minutes = 0;
     let t;
     let timer = document.getElementById("timer");
+    let modalHeading = document.querySelector('.modal-header');
     match= 0;
     moves= 0;
     $rating= $('fa-star');
     $moves= $('.moves');
     newCards= '';
     deck= document.querySelector('.deck');
+    gameStarted = false;
 
 
 
@@ -45,7 +47,7 @@
         }
 
         flipCard();
-
+        resetTimer();
   };
 
 
@@ -56,6 +58,9 @@
               tempArray.push(cards[i]);
               checkMatch();
               startTimer();
+              gameStarted = true;
+              moves++
+              $('#moves').text(moves);
 
             });
         }
@@ -68,7 +73,8 @@ function checkMatch() {
                 $('LI.card.open.show').first()["0"].className = 'card show match';
                 $('LI.card.open.show').last()["0"].className = 'card show match';
                 match++;
-                checkWin();
+                console.log(match);
+                // winModal();
                 stopClock();
           } else {
             //flip cards back convert
@@ -77,19 +83,27 @@ function checkMatch() {
                   $('LI.card.open.show').last()["0"].classList = ('card');
               }, 1000);
           }
+
     }
+
 };
 
+function resetTimer() {
+    clearInterval(t);
+    seconds = 0;
+    minutes = 0;
+    timer.textContent = ('0:00');
 
+}
 //timer to count to end of game -- until $('.match') == 16
-
 function startTimer() {
        clearInterval(t);
       t = setInterval(buildTimer,1000);
-  }
+};
 
 timer.textContent = time;
 function buildTimer() {
+  if(match < 8) {
     seconds++;
         if (seconds === 60) {
             seconds = 0;
@@ -99,22 +113,22 @@ function buildTimer() {
                 seconds = 0;
             }
         }
+  }
+
+
+
+
 timer.textContent = (minutes < 10 ? "0" + minutes.toString(): minutes) + ":" + (seconds < 10 ? "0" + seconds.toString(): seconds);
-}
+};
+
+
 
 function stopClock() {
-   if ($('.match').length === 16){
-     clearInterval(t);
-   GameEndMessage();
-   }
+  if(match === 8) {
+      winModal();
+  }
 }
 
-function resetTimer() {
-  clearInterval(t);
-  seconds = 0;
-  minutes = 0;
-  timer.textContent = time;
- }
 
 
 
@@ -140,7 +154,7 @@ function shuffle(array) {
 
     //Needs further work
           //Rating system: higher number of moves = lower stars
-          // starRating: function()  {
+          // function starRating()  {
           //   let rating = 3;
           //   if (moves > stars3 && moves < stars2)  {
           //     $rating.eq(3).removeClass('fa-star').addClass('fa-star-o');
@@ -160,59 +174,42 @@ function shuffle(array) {
           // },
 
 
+function moveCounter()  {
+    $
+}
 
-    // checkMatch: function () {
-    //     if($('.card.open').length === 2) {
-    //         if($('.open').first().data('cardValue') == $('.open').last().data('cardValue')) {
-    //             $('.open').each(function() {
-    //               $(this).addClass('match');
-    //             });
-    //             $('.open').each(function() {
-    //               $(this).removeClass('open show');
-    //             });
-    //             app.checkWin();
-    //         } else {
-    //           //flip cards back over
-    //           setTimeout(function () {
-    //               $('.open').each(function () {
-    //                 $(this).html('').removeClass('open show');
-    //               });
-    //           }, 1000);
-    //         }
-    //     }
-    // },
-    // moveCounter: function ()  {
+// function moveCounter()  {
     //   $('.card').on('click', function ()  {
     //     for ()
     //   })
     // }
 
 
-
-    function checkWin() {
-        if($('.card.match').length === 16) {
-              winModal();
-        }
-    };
-
     function winModal() {
-
-
-
-
         //open the modal
         modal.style.display = "block";
+
+        //winning for when all matches complete
+        winningMessage = document.createElement('p');
+        winningMessage.innerHTML = '<p>Your time: ' + timer.textContent + '!</p>';
+        winningMessage.classList.add('modal-body');
+        modalHeading.appendChild(winningMessage);
+        modal.style.display = 'block';
+
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
           modal.style.display = "none";
+          // init();
+          // resetTimer();
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
           if (event.target == modal) {
               modal.style.display = "none";
-              resetTimer();
+              // resetTimer();
+              // init();
           }
         }
     };
