@@ -157,7 +157,34 @@ h1 {
 }
 
 /* Modal Body */
-.modal-body {padding: 2px 16px;}
+.modal-body {padding: 2px 16px 15px;}
+
+
+
+.modal-footer {
+  padding: 22px 0px 2px;
+  background-color: white;
+
+  /* width:50px;
+  height: 25px; */
+
+}
+
+.modal-button {
+  font-size: 16px;
+  border: 1px solid #02ccba;
+  border-radius: 5px;
+  color:#02ccba;
+  padding:10px;
+
+}
+
+.modal-button:hover,
+.modal-button:focus  {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* Modal Content/Box */
 .modal-content {

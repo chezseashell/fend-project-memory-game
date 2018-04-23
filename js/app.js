@@ -17,6 +17,8 @@
     let t;
     let timer = document.getElementById("timer");
     let modalHeading = document.querySelector('.modal-header');
+    const modalButton = document.querySelector('.modal-button');
+
     match= 0;
     moves= 0;
     $rating= $('.fa-star');
@@ -32,6 +34,7 @@
     stars1= 33;
     stars2= 26;
     stars3= 20;
+
 
 
     //this function will start the game
@@ -207,21 +210,25 @@ function shuffle(array) {
         winningMessage.classList.add('modal-body');
         modalHeading.appendChild(winningMessage);
         modal.style.display = 'block';
-
+        // restartButton = document.createElement('button');
+        // restartButton.innterHTML = '<button>Restart Game</button>';
+        // restartButton.textContent = "Restart Game";
+        // restartButton.classList.add('modal-button');
+        // winningMessage.appendChild(restartButton);
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
           modal.style.display = "none";
-          // init();
-          // resetTimer();
+
         }
+
+
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
           if (event.target == modal) {
               modal.style.display = "none";
-              // resetTimer();
-              // init();
+
           }
         }
     };
