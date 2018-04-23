@@ -19,8 +19,8 @@
     let modalHeading = document.querySelector('.modal-header');
     match= 0;
     moves= 0;
-    $rating= $('fa-star');
-    $moves= $('.moves');
+    $rating= $('.fa-star');
+    // $moves= $('.moves');
     newCards= '';
     deck= document.querySelector('.deck');
     gameStarted = false;
@@ -29,9 +29,9 @@
 
 
     //Scoring system 1-3 stars
-    stars1= 22;
-    stars2= 16;
-    stars3= 14;
+    stars1= 33;
+    stars2= 26;
+    stars3= 20;
 
 
     //this function will start the game
@@ -58,9 +58,10 @@
               tempArray.push(cards[i]);
               checkMatch();
               startTimer();
+              starRating(moves);
               gameStarted = true;
               moves++
-              $('#moves').text(moves);
+              $('.moves').text(moves);
 
             });
         }
@@ -130,6 +131,19 @@ function stopClock() {
 }
 
 
+function starRating(moves) {
+    let rating = 3;
+    if (moves > stars3 && moves < stars2) {
+        $rating.eq(3).removeClass('fa-star').addClass('fa-star-o');
+    } else if (moves > stars2 && moves < stars1) {
+      $rating.eq(2).removeClass('fa-star').addClass('fa-star-o');
+    } else if (moves > stars1)  {
+      $rating.eq(1).removeClass('fa-star').addClass('fa-star-o');
+      rating = 1;
+    }
+    return {score: rating};
+}
+
 
 
 
@@ -174,9 +188,7 @@ function shuffle(array) {
           // },
 
 
-function moveCounter()  {
-    $
-}
+
 
 // function moveCounter()  {
     //   $('.card').on('click', function ()  {
@@ -191,7 +203,7 @@ function moveCounter()  {
 
         //winning for when all matches complete
         winningMessage = document.createElement('p');
-        winningMessage.innerHTML = '<p>Your time: ' + timer.textContent + '!</p>';
+        winningMessage.innerHTML = '<p>Your time: ' + timer.textContent + ' Your moves:' + (moves+1) +'!</p>';
         winningMessage.classList.add('modal-body');
         modalHeading.appendChild(winningMessage);
         modal.style.display = 'block';
