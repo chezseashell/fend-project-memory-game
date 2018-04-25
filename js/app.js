@@ -2,10 +2,10 @@ let cards= ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'a
 let tempArray=[];
 
 // Get the modal
-var modal = document.getElementById('myModal');
+const modal = document.getElementById('myModal');
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close")[0];
 let timeoutID='';
 
 //for the timer
@@ -14,7 +14,7 @@ let seconds = 0;
 let minutes = 0;
 let t;
 let timer = document.getElementById("timer");
-let modalHeading = document.querySelector('.modal-header');
+const modalHeading = document.querySelector('.modal-header');
 const modalButton = document.querySelector('.modal-button');
 
 match= 0;

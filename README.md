@@ -5,7 +5,7 @@ This game was created as part of Udacity's FEND class on JavaScript. The game is
 ## Installing from source
 
 1. Clone the following repo:
-   * git clone https://github.com/chezseashell/fend-project-memory-game.git
+ * git clone https://github.com/chezseashell/fend-project-memory-game.git
 2. Load the index.html file in your browser.
 3. Start playing
 
@@ -18,7 +18,7 @@ This game was created as part of Udacity's FEND class on JavaScript. The game is
 
 
 ## Built with the help of:
-* Starter code provided by Udacity: (https://github.com/udacity/fend-project-memory-game)
+* Starter code provided by Udacity (https://github.com/udacity/fend-project-memory-game)
 
-##Author
+## Author
 * Michelle Dailey
