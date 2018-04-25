@@ -1,8 +1,9 @@
-//Set variables
 let cards= ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle' , 'bicycle', 'bomb', 'bomb'];
 let tempArray=[];
+
 // Get the modal
 var modal = document.getElementById('myModal');
+
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 let timeoutID='';
@@ -45,7 +46,7 @@ function init() {
   resetTimer();
   };
 
-
+// This will change the class of the cards to 'open', 'show' once clicked
 function flipCard() {
   for (let i = 0; i < cards.length; i++)  {
     cards[i].addEventListener('click', function() {
@@ -61,7 +62,7 @@ function flipCard() {
   }
 };
 
-
+// Change the cards class to 'match' if true, otherwise will close them
 function checkMatch() {
   if ($('LI.card.open.show').length == 2) {
     if ($('LI.card.open.show').first()["0"].innerHTML === $('LI.card.open.show').last()["0"].innerHTML) {
@@ -87,7 +88,7 @@ function resetTimer() {
   timer.textContent = ('0:00');
 }
 
-//timer to count to end of game -- until $('.match') == 16
+//timer to count to end of game, only works when match < 8
 function startTimer() {
   clearInterval(t);
   t = setInterval(buildTimer,1000);
@@ -143,13 +144,14 @@ function shuffle(array) {
   return array;
 };
 
+// Displays a pop-up modal open finding all matches
 function winModal() {
   //open the modal
   modal.style.display = "block";
 
   //winning for when all matches complete
   winningMessage = document.createElement('p');
-  winningMessage.innerHTML = '<p>Your time: ' + timer.textContent + ' Your moves:' + (moves+1) +'!</p>';
+  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + (moves+1) +'</p>';
   winningMessage.classList.add('modal-body');
   modalHeading.appendChild(winningMessage);
   modal.style.display = 'block';

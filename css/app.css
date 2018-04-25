@@ -133,6 +133,7 @@ h1 {
 /* The Modal (background) */
 .modal {
     font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
     font-weight: 300;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -157,7 +158,9 @@ h1 {
 }
 
 /* Modal Body */
-.modal-body {padding: 2px 16px 15px;}
+.modal-body {
+    padding: 2px 16px 15px;
+}
 
 
 
