@@ -1,20 +1,24 @@
 # Memory Game Project
 
-## Table of Contents
+This game was created as part of Udacity's FEND class on JavaScript. The game is won when all 8 matches have been found by clicking on the cards. Once all matches have been found a pop-up message will show you your score and and give you the option to play again.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Installing from source
 
-## Instructions
+1. Clone the following repo:
+   * git clone https://github.com/chezseashell/fend-project-memory-game.git
+2. Load the index.html file in your browser.
+3. Start playing
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## How to Play
+* The game is one when all 8 matches have been found
+1. To begin playing, click on two cards and see if they match. If they match then look for another pair, if not, try again.
+2. Continue clicking to look for additional pairs until you have 8 matches.
+3. When you have 8 matches you win the game, Congratulations! A modal will display your time and number of moves.
+4. On the pop-up message you can either close it or hit "Restart Game" to play again.
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Built with the help of:
+* Starter code provided by Udacity: (https://github.com/udacity/fend-project-memory-game)
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+##Author
+* Michelle Dailey
