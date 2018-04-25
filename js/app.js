@@ -105,6 +105,7 @@ function buildTimer() {
           minutes = 0;
           seconds = 0;
         }
+      }
   }
 timer.textContent = (minutes < 10 ? "0" + minutes.toString(): minutes) + ":" + (seconds < 10 ? "0" + seconds.toString(): seconds);
 };
