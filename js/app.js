@@ -9,7 +9,7 @@ const span = document.getElementsByClassName("close")[0];
 let timeoutID='';
 
 //for the timer
-let time = "00:00"
+let time = "00:00";
 let seconds = 0;
 let minutes = 0;
 let t;
@@ -37,14 +37,14 @@ function init() {
   let tempArray = [];
 
   for (let i = 0; i < allCards.length; i++) {
-    newCards += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'
+    newCards += '<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>';
     deck.innerHTML = newCards;
     cards = $('.card');
   }
 
   flipCard();
   resetTimer();
-  };
+  }
 
 // This will change the class of the cards to 'open', 'show' once clicked
 function flipCard() {
@@ -59,8 +59,10 @@ function flipCard() {
       moves++
       $('.moves').text(moves);
     });
+
   }
-};
+}
+
 
 // Change the cards class to 'match' if true, otherwise will close them
 function checkMatch() {
@@ -79,7 +81,7 @@ function checkMatch() {
       }, 1000);
     }
   }
-};
+}
 
 function resetTimer() {
   clearInterval(t);
@@ -92,7 +94,7 @@ function resetTimer() {
 function startTimer() {
   clearInterval(t);
   t = setInterval(buildTimer,1000);
-};
+}
 
 timer.textContent = time;
 function buildTimer() {
@@ -108,13 +110,13 @@ function buildTimer() {
       }
   }
 timer.textContent = (minutes < 10 ? "0" + minutes.toString(): minutes) + ":" + (seconds < 10 ? "0" + seconds.toString(): seconds);
-};
+}
 
 function stopClock() {
   if(match === 8) {
     winModal();
   }
-};
+}
 
 function starRating(moves) {
   let rating = 3;
@@ -127,7 +129,7 @@ function starRating(moves) {
     rating = 1;
   }
   return {score: rating};
-};
+}
 
 //Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -142,7 +144,7 @@ function shuffle(array) {
   }
   console.log('Shuffled Card Array:' +cards);
   return array;
-};
+}
 
 // Displays a pop-up modal open finding all matches
 function winModal() {
@@ -159,14 +161,14 @@ function winModal() {
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = "none";
-  }
+  };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  }
-};
+  };
+}
 
 init();
