@@ -25,9 +25,9 @@ deck= document.querySelector('.deck');
 gameStarted = false;
 
 //Scoring system 1-3 stars
-stars1= 33;
-stars2= 26;
-stars3= 20;
+stars1= 24;
+stars2= 19;
+stars3= 15;
 
 
 //this function will start the game
