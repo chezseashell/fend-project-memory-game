@@ -51,13 +51,15 @@ function flipCard() {
   for (let i = 0; i < cards.length; i++)  {
     cards[i].addEventListener('click', function() {
       this.classList.add('open', 'show');
-      tempArray.push(cards[i]);
+      if ($('LI.open.show').length > 2) {
+        this.classList.remove('open', 'show');
+      } else {
+        tempArray.push(cards[i]);
+      }
       checkMatch();
       startTimer();
       starRating(moves);
       gameStarted = true;
-      moves++
-      $('.moves').text(moves);
     });
 
   }
@@ -67,12 +69,14 @@ function flipCard() {
 // Change the cards class to 'match' if true, otherwise will close them
 function checkMatch() {
   if ($('LI.card.open.show').length == 2) {
+
     if ($('LI.card.open.show').first()["0"].innerHTML === $('LI.card.open.show').last()["0"].innerHTML) {
           $('LI.card.open.show').first()["0"].className = 'card show match';
           $('LI.card.open.show').last()["0"].className = 'card show match';
           match++;
           console.log(match);
           stopClock();
+
     } else {
       //flip cards back convert
       setTimeout(function () {
@@ -80,7 +84,10 @@ function checkMatch() {
         $('LI.card.open.show').last()["0"].classList = ('card');
       }, 1000);
     }
+    moves++;
+    $('.moves').text(moves);
   }
+
 }
 
 function resetTimer() {
