@@ -121,7 +121,9 @@ timer.textContent = (minutes < 10 ? "0" + minutes.toString(): minutes) + ":" + (
 
 function stopClock() {
   if(match === 8) {
-    winModal();
+    let score = starRating(moves).score;
+    winModal(moves, score);
+
   }
 }
 
@@ -154,13 +156,13 @@ function shuffle(array) {
 }
 
 // Displays a pop-up modal open finding all matches
-function winModal() {
+function winModal(moves, score) {
   //open the modal
   modal.style.display = "block";
 
   //winning for when all matches complete
   winningMessage = document.createElement('p');
-  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + (moves+1) +'</p>';
+  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + (moves+1) +'<br>Stars: ' + score +'</br></p>';
   winningMessage.classList.add('modal-body');
   modalHeading.appendChild(winningMessage);
   modal.style.display = 'block';
