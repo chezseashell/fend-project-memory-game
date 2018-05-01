@@ -82,10 +82,12 @@ function checkMatch() {
       setTimeout(function () {
         $('LI.card.open.show').first()["0"].classList = ('card');
         $('LI.card.open.show').last()["0"].classList = ('card');
+        moves++;
+        $('.moves').text(moves);
       }, 1000);
     }
-    moves++;
-    $('.moves').text(moves);
+    // moves++;
+    // $('.moves').text(moves);
   }
 
 }
@@ -157,12 +159,13 @@ function shuffle(array) {
 
 // Displays a pop-up modal open finding all matches
 function winModal(moves, score) {
+
   //open the modal
   modal.style.display = "block";
 
   //winning for when all matches complete
   winningMessage = document.createElement('p');
-  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + (moves+1) +'<br>Stars: ' + score +'</br></p>';
+  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + moves +'<br>Stars: ' + score +'</br></p>';
   winningMessage.classList.add('modal-body');
   modalHeading.appendChild(winningMessage);
   modal.style.display = 'block';
