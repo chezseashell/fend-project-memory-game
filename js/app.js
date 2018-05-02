@@ -25,10 +25,9 @@ deck= document.querySelector('.deck');
 gameStarted = false;
 
 //Scoring system 1-3 stars
-stars1= 24;
-stars2= 19;
-stars3= 15;
-
+stars1= 18;
+stars2= 12;
+stars3= 8;
 
 //this function will start the game
 function init() {
@@ -41,7 +40,6 @@ function init() {
     deck.innerHTML = newCards;
     cards = $('.card');
   }
-
   flipCard();
   resetTimer();
   }
@@ -58,13 +56,11 @@ function flipCard() {
       }
       checkMatch();
       startTimer();
-      starRating(moves);
+      // starRating(moves);
       gameStarted = true;
     });
-
   }
 }
-
 
 // Change the cards class to 'match' if true, otherwise will close them
 function checkMatch() {
@@ -84,12 +80,10 @@ function checkMatch() {
         $('LI.card.open.show').last()["0"].classList = ('card');
         moves++;
         $('.moves').text(moves);
+        starRating(moves);
       }, 1000);
     }
-    // moves++;
-    // $('.moves').text(moves);
   }
-
 }
 
 function resetTimer() {
@@ -124,7 +118,7 @@ timer.textContent = (minutes < 10 ? "0" + minutes.toString(): minutes) + ":" + (
 function stopClock() {
   if(match === 8) {
     let score = starRating(moves).score;
-    winModal(moves, score);
+    winModal(moves,score);
 
   }
 }
@@ -165,7 +159,8 @@ function winModal(moves, score) {
 
   //winning for when all matches complete
   winningMessage = document.createElement('p');
-  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + moves +'<br>Stars: ' + score +'</br></p>';
+  winningMessage.innerHTML = '<p><strong>Your stats</strong><br>Time: ' + timer.textContent + '</br>Moves: ' + moves +'<br>Score: ' + $('.fa.fa-star').length
+ +'</br></p>';
   winningMessage.classList.add('modal-body');
   modalHeading.appendChild(winningMessage);
   modal.style.display = 'block';
